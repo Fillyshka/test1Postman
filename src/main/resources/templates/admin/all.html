@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User List</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1>User List</h1>
+  <a th:href="@{/admin/createUser}">Create New User</a>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Roles</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.email}"></td>
+      <td>
+        <span th:each="role : ${user.roles}" th:text="${role} + ' '"></span>
+      </td>
+      <td>
+        <a th:href="@{/admin/{id}(id=${user.id})}">View</a>
+        <a th:href="@{/admin/editUser/{id}(id=${user.id})}">Edit</a>
+        <form th:action="@{/admin/delete/{id}(id=${user.id})}" method="post" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a th:href="@{/logout}">Logout</a>
+</div>
+</body>
+</html>
