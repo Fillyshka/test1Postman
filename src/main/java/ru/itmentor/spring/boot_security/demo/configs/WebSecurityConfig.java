@@ -40,7 +40,7 @@ public class WebSecurityConfig {
                 .formLogin(form -> form
                         .successHandler(successUserHandler)
                         .permitAll())
-                .httpBasic(httpBasic -> {}) // Поддержка Basic Auth
+                .httpBasic(httpBasic -> {})
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/")

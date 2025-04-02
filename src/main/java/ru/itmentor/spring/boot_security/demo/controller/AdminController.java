@@ -59,8 +59,6 @@ public class AdminController {
             @RequestParam("email") String email,
             @RequestParam("password") String password,
             @RequestParam(value = "roles", required = false) List<String> roleNames) {
-        System.out.println("Creating user: name=" + name + ", email=" + email + ", password=" + password);
-        System.out.println("Selected roles: " + roleNames);
 
         User user = new User(name, email, password);
         Set<Role> roles = new HashSet<>();
@@ -97,8 +95,6 @@ public class AdminController {
             @RequestParam("email") String email,
             @RequestParam(value = "password", required = false) String password,
             @RequestParam(value = "roles", required = false) List<String> roleNames) {
-        System.out.println("Updating user: id=" + id + ", name=" + name + ", email=" + email + ", password=" + password);
-        System.out.println("Selected roles: " + roleNames);
 
         User user = userService.readUser(id);
         user.setName(name);

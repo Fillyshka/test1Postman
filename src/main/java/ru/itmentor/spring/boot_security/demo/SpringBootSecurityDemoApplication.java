@@ -24,7 +24,6 @@ public class SpringBootSecurityDemoApplication {
 	@Transactional
 	public CommandLineRunner demoData(UserService userService, RoleRepository roleRepository) {
 		return args -> {
-			// Создаём роли
 			Role adminRole = roleRepository.findByName("ROLE_ADMIN")
 					.orElseGet(() -> {
 						Role newRole = new Role("ROLE_ADMIN");
@@ -37,14 +36,13 @@ public class SpringBootSecurityDemoApplication {
 						return roleRepository.save(newRole);
 					});
 
-			// Проверяем, существуют ли пользователи, чтобы не создавать дубликаты
 			if (userService.findByEmail("admin@example.com") == null) {
 				User admin = new User("Admin", "admin@example.com", "admin");
 				Set<Role> adminRoles = new HashSet<>();
 				adminRoles.add(adminRole);
 				adminRoles.add(userRole);
 				admin.setRoles(adminRoles);
-				userService.createUser(admin); // Используем createUser вместо saveUser
+				userService.createUser(admin);
 			}
 
 			if (userService.findByEmail("user@example.com") == null) {
@@ -52,7 +50,7 @@ public class SpringBootSecurityDemoApplication {
 				Set<Role> userRoles = new HashSet<>();
 				userRoles.add(userRole);
 				user.setRoles(userRoles);
-				userService.createUser(user); // Используем createUser вместо saveUser
+				userService.createUser(user);
 			}
 		};
 	}

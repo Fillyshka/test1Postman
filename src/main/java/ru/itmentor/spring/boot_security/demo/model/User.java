@@ -34,7 +34,6 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
-    // Конструкторы
     public User() {}
 
     public User(String name, String email, String password) {
@@ -43,7 +42,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    // Геттеры и сеттеры
     public Long getId() {
         return id;
     }
@@ -84,7 +82,6 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    // Реализация UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -115,7 +112,6 @@ public class User implements UserDetails {
         return true;
     }
 
-    // Для корректного отображения в Thymeleaf
     @Override
     public String toString() {
         return "User{id=" + id + ", name='" + name + "', email='" + email + "'}";
